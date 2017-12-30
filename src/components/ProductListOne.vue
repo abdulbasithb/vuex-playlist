@@ -12,25 +12,38 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
     products() {
       return this.$store.state.products
     },
-    saleProducts() {
-      return this.$store.getters.saleProducts
-    }
+    //getters
+    /*saleProducts() {
+       return this.$store.getters.saleProducts
+    }*/
+    //mapGetters
+    ...mapGetters([
+      'saleProducts',
+    ])
+
   },
   methods: {
-    reducePrice: function(amount) {
-      // this.$store.state.products.forEach( product => {
-      //   product.price -= 1
-      // })
+    //reducePrice: function(amount) {
+      //without mutation, direct to state on store
+      /*this.$store.state.products.forEach( product => {
+        product.price -= 1
+      })*/
       //mutation
       // this.$store.commit('reducePrice')
       //action
-      this.$store.dispatch('reducePrice', amount)
-    }
+      // this.$store.dispatch('reducePrice', amount)
+      //mapActions
+    //}
+    ...mapActions([
+      'reducePrice'
+    ])
   }
 };
 </script>
